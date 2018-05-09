@@ -1,7 +1,6 @@
 // JavaScript för att implementera kraven A-D.
 
-//fetch
-
+//fetch posts
 fetch('https://jsonplaceholder.typicode.com/posts')
 .then(response => response.json())
 .then(json => {
@@ -9,23 +8,26 @@ fetch('https://jsonplaceholder.typicode.com/posts')
     blog(json)
 })
 
+//fetch comments
 const getComments = (id) => {
     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
         .then(res => res.json())
         .then(json => blog_comments(json))
 };
 
+
+//random number generator
 function addlikes(blogList){
     blogList.forEach(like => {
         like["likes"] = Math.floor((Math.random() * 100) + 1);
     });
 }
 
+
+//function for when button is pushed
 $('#blog').on('click', (e) => {
     getComments(Number(e.target.id))
 });
-
-//display
 
 //display blog and commnets affter button press
 function blog(data){
